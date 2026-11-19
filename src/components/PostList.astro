@@ -1,0 +1,19 @@
+---
+import { url, ymd } from '../lib/site';
+const { posts } = Astro.props;
+---
+<ul class="post-list">
+  {posts.map((p: any) => (
+    <li>
+      <time datetime={ymd(p.data.date)}>{ymd(p.data.date)}</time>
+      <div>
+        <a href={url(`/posts/${p.id}/`)}>{p.data.title}</a>
+        {p.data.tags.length > 0 && (
+          <span class="tags">
+            {p.data.tags.map((t: string) => <a href={url(`/tags/${t}/`)}>#{t}</a>)}
+          </span>
+        )}
+      </div>
+    </li>
+  ))}
+</ul>

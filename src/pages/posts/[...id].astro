@@ -1,0 +1,37 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getPosts, url, ymd } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, date, summary, paper, tags } = post.data;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const tweet = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(pageUrl)}`;
+---
+<Base title={title} description={summary ?? paper?.title} type="article">
+  <article>
+    <header class="post-header">
+      <h1>{title}</h1>
+      <p class="meta">
+        <time datetime={ymd(date)}>{ymd(date)}</time>
+        {tags.map((t) => <a href={url(`/tags/${t}/`)}>#{t}</a>)}
+      </p>
+      {paper && (
+        <dl class="paper">
+          {paper.title && <><dt>論文</dt><dd>{paper.url ? <a href={paper.url}>{paper.title}</a> : paper.title}</dd></>}
+          {paper.authors && <><dt>著者</dt><dd>{paper.authors}</dd></>}
+          {(paper.venue || paper.year) && <><dt>掲載</dt><dd>{[paper.venue, paper.year].filter(Boolean).join(' ')}</dd></>}
+        </dl>
+      )}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <p class="share"><a href={tweet} target="_blank" rel="noopener">𝕏 でシェア</a></p>
+  </article>
+</Base>

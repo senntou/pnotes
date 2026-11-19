@@ -1,0 +1,121 @@
+:root {
+  --fg: #1f2328;
+  --muted: #656d76;
+  --border: #d0d7de;
+  --link: #0969da;
+  --bg-soft: #f6f8fa;
+  --cell: 10px;
+  --gap: 3px;
+  --l0: #ebedf0;
+  --l1: #9be9a8;
+  --l2: #40c463;
+  --l3: #30a14e;
+  --l4: #216e39;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 0 1rem;
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.8;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+.site-title { font-weight: 700; font-size: 1.2rem; color: var(--fg); }
+.site-footer {
+  margin: 3rem 0 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* 草 */
+.grass { margin-bottom: 2rem; }
+.grass-total { margin: 0 0 0.4rem; color: var(--muted); font-size: 0.9rem; }
+.grass-scroll { overflow-x: auto; padding-bottom: 4px; }
+.grass-months {
+  display: grid;
+  column-gap: var(--gap);
+  font-size: 10px;
+  color: var(--muted);
+  height: 15px;
+  white-space: nowrap;
+}
+.grass-grid { display: flex; gap: var(--gap); width: max-content; }
+.grass-week { display: flex; flex-direction: column; gap: var(--gap); }
+.cell {
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: 2px;
+  outline: 1px solid rgba(27, 31, 36, 0.06);
+  outline-offset: -1px;
+}
+.l0 { background: var(--l0); }
+.l1 { background: var(--l1); }
+.l2 { background: var(--l2); }
+.l3 { background: var(--l3); }
+.l4 { background: var(--l4); }
+
+/* 記事一覧 */
+.post-list { list-style: none; padding: 0; }
+.post-list li {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--bg-soft);
+}
+.post-list time { color: var(--muted); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.tags a, .meta a { margin-left: 0.5rem; font-size: 0.85rem; color: var(--muted); }
+
+/* 記事 */
+.post-header h1 { margin-bottom: 0.2rem; line-height: 1.4; }
+.meta { color: var(--muted); margin-top: 0; }
+.paper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 1rem;
+  background: var(--bg-soft);
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.paper dt { color: var(--muted); }
+.paper dd { margin: 0; }
+
+.prose img { max-width: 100%; }
+.prose pre { padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; }
+.prose code { font-size: 0.9em; }
+.prose blockquote {
+  margin: 1rem 0;
+  padding: 0 1rem;
+  color: var(--muted);
+  border-left: 4px solid var(--border);
+}
+.prose table { border-collapse: collapse; }
+.prose th, .prose td { border: 1px solid var(--border); padding: 0.3rem 0.7rem; }
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.3rem 0; }
+
+.share { margin-top: 2.5rem; }
+.share a {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--fg);
+  font-size: 0.9rem;
+}

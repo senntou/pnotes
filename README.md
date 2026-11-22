@@ -4,7 +4,8 @@
 
 ## 書き方
 
-1. `templates/note.md` を `src/content/posts/YYYY-MM-DD-なにか.md` にコピー
+1. `make new n=なにか` で `src/content/posts/今日の日付-なにか.md` ができる（中身は `templates/note.md`、`date` は今日）
+   - 別の日付にしたいときは `make new n=なにか DATE=2026-11-20`
 2. 冒頭（frontmatter）を埋めて本文を書く
 3. `main` にプッシュすると自動で公開される
 

@@ -1,6 +1,6 @@
 # Paper Notes
 
-読んだ論文のメモ。公開先: https://senntou.github.io/papers/
+読んだ論文のメモ。公開先: https://senntou.github.io/pnotes/
 
 ## 書き方
 
@@ -18,7 +18,7 @@
 
 ```sh
 npm install
-npm run dev   # http://localhost:4321/papers/
+npm run dev   # http://localhost:4321/pnotes/
 ```
 
 ## レンダリングを変えたいとき

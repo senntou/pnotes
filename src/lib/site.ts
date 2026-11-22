@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 export const SITE_TITLE = 'Paper Notes';
 export const SITE_DESCRIPTION = '読んだ論文のメモ';
 
-/** base（/papers）を考慮したパスを作る */
+/** base（/pnotes）を考慮したパスを作る */
 export function url(path: string): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   return `${base}/${path.replace(/^\//, '')}`;

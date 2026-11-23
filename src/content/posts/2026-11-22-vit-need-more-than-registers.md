@@ -43,7 +43,31 @@ CLSトークンの作り方を大きく変える。
 そして、この低周波性を元に集約しCLSトークンを作る。
 具体的には、成分ごとに top-k パッチを選択し、選ばれたパッチの平均集約を行う。
 
-以上。
+### 数式で
+
+パッチトークンを $ \bm{X}_{\text{patch}} \in \mathbb{R}^{N \times D} $ とする。
+
+1. チャンネル方向にフーリエ変換  
+$$ \bm{X}_{\text{FFT}} = \mathrm{FFT}_{\text{1D}}(\bm{X}_{\text{patch}}) $$
+1. ローパスフィルタを適用  
+$$ \bm{X}_{\text{LP}} = \bm{X}_{\text{FFT}} \odot \bm{g}, \quad \bm{g} \in [0, 1]^{D} $$
+3. 逆フーリエ変換して実部（振幅）のみを取得  
+$$ \hat{\bm{X}}_{\text{patch}} = \mathcal{R}\left\{ \mathrm{IFFT}_{\text{1D}}(\bm{X}_{\text{LP}}) \right\} $$
+
+最終的に、低周波成分（取り除かれたもの）と高周波成分（取り除かれなかったもの）の比率が成分のスコアとなる。
+$$
+\bm{S}_{i, j} = \frac{\left| \hat{\bm{X}}_{\text{patch}}[i, j] \right|}{\left| \hat{\bm{X}}_{\text{patch}}[i, j] - \bm{X}_{\text{patch}}[i, j] \right| + \varepsilon}
+$$
+
+最後に、**成分毎に** top-k 集約を行う。
+つまり、成分毎に最も低周波な $k$ パッチを決め、その値を平均する。
+$$
+\begin{aligned}
+\mathcal{I}_k(j) &= \operatorname{TopK}\left( \{ \bm{S}_{i, j} \}_{i=1}^{N}, k \right), \\
+\bm{Q}_{\text{CLS}}[j] &= \frac{1}{k} \sum_{i \in \mathcal{I}_k(j)} \bm{X}_{\text{patch}}[i, j], \quad j = 1, \dots, D
+\end{aligned}
+$$
+
 
 ## 結果
 VOC、COCO などのパッチ特徴を用いるタスクでの実験の結果、学習なしのセグメンテーションなどの（繰り返しのため略）

@@ -110,6 +110,41 @@ a:hover { text-decoration: underline; }
 .prose th, .prose td { border: 1px solid var(--border); padding: 0.3rem 0.7rem; }
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.3rem 0; }
 
+/* :::note ボックス */
+.note-box {
+  --note-color: var(--muted);
+  margin: 1.2rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+  background: var(--bg-soft);
+  border-left: 4px solid var(--note-color);
+}
+.note-box-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.5rem;
+  color: var(--note-color);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.note-box-title::before {
+  font-size: 1.2rem;
+  line-height: 1;
+  content: "📝";
+}
+.note-box > :nth-child(2) { margin-top: 0; }
+.note-box > :last-child { margin-bottom: 0; }
+
+.note-box-info { background: #ddf4ff; --note-color: var(--link); }
+.note-box-info .note-box-title::before { content: "ℹ️"; }
+
+.note-box-warn { background: #fff8c5; --note-color: #9a6700; }
+.note-box-warn .note-box-title::before { content: "⚠️"; }
+
+.note-box-alert { background: #ffebe9; --note-color: #cf222e; }
+.note-box-alert .note-box-title::before { content: "🚨"; }
+
 .share { margin-top: 2.5rem; }
 .share a {
   display: inline-block;

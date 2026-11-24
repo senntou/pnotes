@@ -1,5 +1,5 @@
 ---
-title: "【論文読み】Vision Transformers Need More Than Registers"
+title: "【論文紹介】Vision Transformers Need More Than Registers"
 date: 2026-11-22
 paper:
   title: "Vision Transformers Need More Than Registers"
